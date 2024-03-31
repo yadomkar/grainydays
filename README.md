@@ -29,15 +29,7 @@ GrainyDays can be run using Docker, making setup and execution straightforward. 
    cd grainydays
    ```
 
-2. **Environment Variables**
-
-   Set up your `.env` file with the necessary environment variables, including your TMDb API key:
-
-   ```plaintext
-   TMDB_API_KEY=your_api_key_here
-   ```
-
-3. **Using Docker**
+2. **Using Docker**
 
    To start the project with Docker, ensure you have Docker installed and running on your machine. 
 
