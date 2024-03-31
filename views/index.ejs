@@ -1,11 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/tailwind.css" />
-  </head>
-  <body>
-    <h1>Supplyframe</h1>
-  </body>
-</html>
+<main id="mainContainer" class="container mx-auto px-4">
+  <section id="about" class="text-center pb-12">
+    <h1 class="text-7xl font-bold mb-4 animate-fadeIn gradient-text">
+      Welcome to GrainyDays
+    </h1>
+    <p class="mx-auto leading-relaxed max-w-2xl animate-fadeIn gradient-text">
+      Discover and explore your favorite movies like never before. Search for
+      your favorite film or click on one below to see more details.
+    </p>
+  </section>
+
+  <section id="featured-movies">
+    <div id="movieCarousel" class="relative overflow-hidden">
+      <div id="slidesWrapper" class="flex">
+        <% for(let i = 0; i < featuredMovies.length; i += 5) { %>
+        <div class="slide flex-none w-full">
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4"
+          >
+            <% featuredMovies.slice(i, i + 5).forEach(movie => { %>
+            <div class="movie-container">
+              <div
+                class="movie-item"
+                data-movie-id="<%= movie.id %>"
+                data-title="<%= movie.title %>"
+                data-release-date="<%= movie.release_date %>"
+                data-poster-path="<%= movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '/images/cat-shoe.jpg' %>"
+                data-overview="<%= movie.overview %>"
+              >
+                <img
+                  src="<%= movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '/images/cat-shoe.jpg' %>"
+                  alt="<%= movie.title %>"
+                  class="w-full object-cover rounded-lg shadow-lg"
+                />
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+
+      <div id="carouselDots" class="flex justify-center space-x-2 mt-4"></div>
+      <button
+        id="prevSlide"
+        class="carousel-control left"
+        aria-label="Previous Slide"
+      >
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button
+        id="nextSlide"
+        class="carousel-control right"
+        aria-label="Next Slide"
+      >
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </section>
+  <%- include('partials/movieDetails') %>
+</main>
+<div id="searchResultsContainer" class="container mx-auto px-4 pt-6 hidden">
+  <h2 class="text-xl text-white font-bold mb-6">Search Results</h2>
+  <div
+    id="searchResultsGrid"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+  ></div>
+  <div id="paginationControls" class="flex justify-center space-x-2 my-4">
+    <button id="prevPage" class="px-4 py-2 bg-gray-700 text-white rounded">
+      Prev
+    </button>
+    <span id="currentPage" class="text-white">1</span>
+    <button id="nextPage" class="px-4 py-2 bg-gray-700 text-white rounded">
+      Next
+    </button>
+  </div>
+</div>
